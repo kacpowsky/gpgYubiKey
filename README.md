@@ -12,6 +12,25 @@
 #### Download and install [Homebrew](https://brew.sh/) and the following packages:
 
 ```bash
+brew install --cask gpg-suite
+```
+
+```bash
 brew install \
-  gnupg yubikey-personalization ykman pinentry-mac wget
+    yubikey-personalization ykman pinentry-mac wget
+```
+
+## Configure the GPG system
+
+#### Create a temporary directory that will be deleted after a system reboot and assign it as the directory for GPG:
+
+### CHANGE YOUR USER NAME!
+
+```bash
+export GNUPGHOME=/Users/macos/.gnupg
+```
+
+```bash
+cd $GNUPGHOME
+wget https://raw.githubusercontent.com/kacpowsky/<your_repository_name>/<branch_name>/<file_name>.<extension_name>
 ```
