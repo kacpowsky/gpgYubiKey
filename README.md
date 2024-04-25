@@ -330,7 +330,7 @@ Remove and re-insert YubiKey.
 
 Verify the status with `gpg --card-status` which will list the available Subkeys:
 
-```bash
+```
 Reader ...........: Yubico YubiKey OTP FIDO CCID 00 00
 Application ID ...: D27600012401020100060578934512
 Application type .: OpenPGP
