@@ -126,13 +126,13 @@ printf "\nKey ID: %40s\nKey FP: %40s\n\n" "$KEYID" "$KEYFP"
 ## Create Subkeys
 
 ```bash
-gpg --batch --pinentry-mode=loopback --passphrase "$CERTIFY_PASS"     --quick-add-key "$KEYFP" ed25519 sign "$EXPIRATION"
+gpg --batch --pinentry-mode=loopback --passphrase "$CERTIFY_PASS" --quick-add-key "$KEYFP" ed25519 sign "$EXPIRATION"
 ```
 ```bash
-gpg --batch --pinentry-mode=loopback --passphrase "$CERTIFY_PASS"     --quick-add-key "$KEYFP" cv25519 encrypt "$EXPIRATION"
+gpg --batch --pinentry-mode=loopback --passphrase "$CERTIFY_PASS" --quick-add-key "$KEYFP" cv25519 encrypt "$EXPIRATION"
 ```
 ```bash
-gpg --batch --pinentry-mode=loopback --passphrase "$CERTIFY_PASS"     --quick-add-key "$KEYFP" ed25519 auth "$EXPIRATION"
+gpg --batch --pinentry-mode=loopback --passphrase "$CERTIFY_PASS" --quick-add-key "$KEYFP" ed25519 auth "$EXPIRATION"
 ```
 
 ## Verify keys
