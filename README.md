@@ -1,4 +1,4 @@
-# GPG SSH YubiKey for MacOS
+# GPG SSH YubiKey for MacOS (2024)
 
 #### This manual provides detailed instructions on configuring YubiKey to operate as an advanced smart card, enabling high-security encryption, digital signing, and authentication mechanisms. 
 #### YubiKey can be programmed to require manual tactile confirmation for executing cryptographic functions, substantially reducing the potential for unauthorized access to credentials.
@@ -392,3 +392,76 @@ ykman openpgp keys set-touch aut on
 
 ## SSH
 
+```bash
+cd ~/.gnupg
+
+wget https://raw.githubusercontent.com/kacpowsky/gpgYubiKey/config/gpg-agent.conf
+```
+
+Add the following to the shell rc file:
+
+for example: `./zshrc`
+
+```bash
+nano ./zshrc
+```
+
+Add
+
+```bash
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent
+```
+
+and
+
+```bash
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+```
+
+```bash
+source ./zshrc
+```
+
+### Last Step
+
+Reload gpg-agent:
+
+```bash
+gpg-connect-agent killagent /bye
+
+gpg-connect-agent /bye
+```
+
+Reload ssh-agent:
+
+```bash
+eval $(ssh-agent -s)
+```
+
+Remove and re-insert YubiKey.
+
+Export the SSH public key:
+
+```bash
+gpg --export-ssh-key <public key id>
+```
+
+Check your ssh agent:
+
+```bash
+$ ssh-add -L
+ssh-ed25519 AAAAB4NzaC1yc2EAAAADAQABAAACAz[...]zreOKM+HwpkHzcy9DQcVG2Nw== cardno:000605553211
+```
+
+ If you see your SSH public key, you have completed all the steps correctly! 
+
+### You can now enjoy your GPG SSH YubiKey authentication
+
+# Additional resources
+
+- [GPG Suite](https://gpgtools.org/)
+- [EdDSA](https://en.wikipedia.org/wiki/EdDSA)
+- [Yubico - PGP](https://developers.yubico.com/PGP/)
+- [Yubico - Yubikey Personalization](https://developers.yubico.com/yubikey-personalization/)
