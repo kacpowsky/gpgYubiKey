@@ -1,7 +1,8 @@
 # GPG SSH YubiKey for MacOS (2024)
 
-#### This manual provides detailed instructions on configuring YubiKey to operate as an advanced smart card, enabling high-security encryption, digital signing, and authentication mechanisms. 
-#### YubiKey can be programmed to require manual tactile confirmation for executing cryptographic functions, substantially reducing the potential for unauthorized access to credentials.
+This manual provides detailed instructions on configuring YubiKey to operate as an advanced smart card, enabling high-security encryption, digital signing, and authentication mechanisms. 
+
+YubiKey can be programmed to require manual tactile confirmation for executing cryptographic functions, substantially reducing the potential for unauthorized access to credentials.
 
 ## Compatible YubiKey
 
@@ -21,9 +22,6 @@ brew install \
 ```
 
 ## Configure the GPG system
-
-Create a temporary directory that will be deleted after a system reboot and assign it as the directory for GPG:
-
 
 ```bash
 export GNUPGHOME=/Users/macos/.gnupg
