@@ -332,20 +332,20 @@ Verify the status with `gpg --card-status` which will list the available Subkeys
 
 ```bash
 Reader ...........: Yubico YubiKey OTP FIDO CCID 00 00
-Application ID ...: D2760001240102010006055532110000
+Application ID ...: D27600012401020100060578934512
 Application type .: OpenPGP
 Version ..........: 3.4
 Manufacturer .....: Yubico
-Serial number ....: 05553211
+Serial number ....: 28926784
 Name of cardholder: YubiKey User
 Language prefs ...: en
 Salutation .......:
 URL of public key : [not set]
-Login data .......: yubikey@example
+Login data .......: example@example
 Signature PIN ....: not forced
 Key attributes ...: ed25519 cv25519 ed25519
 Max. PIN lengths .: 127 127 127
-PIN retry counter : 3 3 3
+PIN retry counter : 5 0 5
 Signature counter : 0
 KDF setting ......: on
 Signature key ....: CF5A 305B 808B 7A0F 230D  A064 B3CD 10E5 02E1 9637
@@ -354,13 +354,13 @@ Encryption key....: A5FA A005 5BED 4DC9 889D  38BC 30CB E8C4 B085 B9F7
       created ....: 2024-01-01 12:00:00
 Authentication key: 570E 1355 6D01 4C04 8B6D  E2A3 AD9E 24E1 B8CB 9600
       created ....: 2024-01-01 12:00:00
-General key info..: sub  ed25519/0xB3CD10E502E19637 2024-01-01 YubiKey User <yubikey@example>
-sec#  ed25519/0xF0F2CFEB04341FB5  created: 2024-01-01  expires: never
-ssb>  ed25519/0xB3CD10E502E19637  created: 2024-01-01  expires: 2026-05-01
+General key info..: sub  ed25519/0xB3CD10E502E19637 2024-05-01 YubiKey User <example@example>
+sec#  ed25519/0xF0F2CFEB04341FB5  created: 2024-05-01  expires: never
+ssb>  ed25519/0xB3CD10E502E19637  created: 2024-05-01  expires: 2026-05-01
                                   card-no: 0006 05553211
-ssb>  cv25519/0x30CBE8C4B085B9F7  created: 2024-01-01  expires: 2026-05-01
+ssb>  cv25519/0x30CBE8C4B085B9F7  created: 2024-05-01  expires: 2026-05-01
                                   card-no: 0006 05553211
-ssb>  ed25519/0xAD9E24E1B8CB9600  created: 2024-01-01  expires: 2026-05-01
+ssb>  ed25519/0xAD9E24E1B8CB9600  created: 2024-05-01  expires: 2026-05-01
                                   card-no: 0006 05553211
 ```
 
