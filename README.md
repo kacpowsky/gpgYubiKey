@@ -4,6 +4,30 @@ This manual provides detailed instructions on configuring YubiKey to operate as 
 
 YubiKey can be programmed to require manual tactile confirmation for executing cryptographic functions, substantially reducing the potential for unauthorized access to credentials.
 
+- [Compatible YubiKey](https://github.com/kacpowsky/gpgYubiKey/tree/main?tab=readme-ov-file#compatible-yubikey)
+- [Set up the system environment](https://github.com/kacpowsky/gpgYubiKey/tree/main?tab=readme-ov-file#set-up-the-system-environment)
+- [Configure the GPG system](https://github.com/kacpowsky/gpgYubiKey/tree/main?tab=readme-ov-file#configure-the-gpg-system)
+- [Environment configuration](https://github.com/kacpowsky/gpgYubiKey/tree/main?tab=readme-ov-file#environment-configuration)
+  - [IDENTITY](https://github.com/kacpowsky/gpgYubiKey/tree/main?tab=readme-ov-file#identity)
+  - [KEY](https://github.com/kacpowsky/gpgYubiKey/tree/main?tab=readme-ov-file#key)
+  - [Expiration](https://github.com/kacpowsky/gpgYubiKey/tree/main?tab=readme-ov-file#expiration)
+  - [Passphrase](https://github.com/kacpowsky/gpgYubiKey/tree/main?tab=readme-ov-file#passphrase)
+- [Generate a certificate key](https://github.com/kacpowsky/gpgYubiKey/tree/main?tab=readme-ov-file#generate-a-certificate-key)
+- [Create Subkeys](https://github.com/kacpowsky/gpgYubiKey/tree/main?tab=readme-ov-file#create-subkeys)
+- [Verify keys](https://github.com/kacpowsky/gpgYubiKey/tree/main?tab=readme-ov-file#verify-keys)
+- [Backup keys](https://github.com/kacpowsky/gpgYubiKey/tree/main?tab=readme-ov-file#backup-keys)
+- [Configure YubiKey](https://github.com/kacpowsky/gpgYubiKey/tree/main?tab=readme-ov-file#configure-yubikey)
+- [Transfer Subkeys](https://github.com/kacpowsky/gpgYubiKey/tree/main?tab=readme-ov-file#transfer-subkeys)
+  - [Signature key](https://github.com/kacpowsky/gpgYubiKey/tree/main?tab=readme-ov-file#signature-key)
+  - [Encryption key](https://github.com/kacpowsky/gpgYubiKey/tree/main?tab=readme-ov-file#encryption-key)
+  - [Authentication key](https://github.com/kacpowsky/gpgYubiKey/tree/main?tab=readme-ov-file#authentication-key)
+- [Verify Subkeys](https://github.com/kacpowsky/gpgYubiKey/tree/main?tab=readme-ov-file#verify-subkeys)
+  - [Using YubiKey](https://github.com/kacpowsky/gpgYubiKey/tree/main?tab=readme-ov-file#using-yubikey)
+  - [Configure touch](https://github.com/kacpowsky/gpgYubiKey/tree/main?tab=readme-ov-file#configure-touch)
+- [SSH](https://github.com/kacpowsky/gpgYubiKey/tree/main?tab=readme-ov-file#ssh)
+  - [Last Step](https://github.com/kacpowsky/gpgYubiKey/tree/main?tab=readme-ov-file#last-step)
+- [Additional resources](https://github.com/kacpowsky/gpgYubiKey/tree/main?tab=readme-ov-file#additional-resources)
+
 ## Compatible YubiKey
 
 All current models of [YubiKey](https://www.yubico.com/pl/store/compare/), with the exception of the FIDO-only Security Key Series and Bio Series YubiKeys, are compatible with the protocols outlined in this guide.
