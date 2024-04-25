@@ -62,7 +62,7 @@ use-agent
 throw-keyids
 ```
 
-## Configuration of environment variables
+## Environment configuration
 
 ### IDENTITY
 
