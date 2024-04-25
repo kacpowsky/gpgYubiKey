@@ -5,11 +5,11 @@
 
 ## Compatible YubiKey
 
-#### All current models of [YubiKey](https://www.yubico.com/pl/store/compare/), with the exception of the FIDO-only Security Key Series and Bio Series YubiKeys, are compatible with the protocols outlined in this guide.
+All current models of [YubiKey](https://www.yubico.com/pl/store/compare/), with the exception of the FIDO-only Security Key Series and Bio Series YubiKeys, are compatible with the protocols outlined in this guide.
 
 ## Set up the system environment
 
-#### Download and install [Homebrew](https://brew.sh/) and the following packages:
+Download and install [Homebrew](https://brew.sh/) and the following packages:
 
 ```bash
 brew install --cask gpg-suite
@@ -22,9 +22,8 @@ brew install \
 
 ## Configure the GPG system
 
-#### Create a temporary directory that will be deleted after a system reboot and assign it as the directory for GPG:
+Create a temporary directory that will be deleted after a system reboot and assign it as the directory for GPG:
 
-### CHANGE YOUR USER NAME!
 
 ```bash
 export GNUPGHOME=/Users/macos/.gnupg
@@ -32,5 +31,5 @@ export GNUPGHOME=/Users/macos/.gnupg
 
 ```bash
 cd $GNUPGHOME
-wget https://raw.githubusercontent.com/kacpowsky/<your_repository_name>/<branch_name>/<file_name>.<extension_name>
+wget https://raw.githubusercontent.com/kacpowsky/gpgYubiKey/config/gpg.conf
 ```
