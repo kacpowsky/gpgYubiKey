@@ -167,3 +167,228 @@ gpg --output $GNUPGHOME/$KEYID-$(date +%F).asc \
     --armor --export $KEYID
 ```
 
+## Configure YubiKey
+
+Connect YubiKey and confirm its status:
+
+```bash
+gpg --card-status
+```
+
+Set PINs manually or generate them
+
+```bash
+ADMIN_PIN=$(LC_ALL=C tr -dc '0-9' < /dev/urandom | fold -w8 | head -1)
+
+USER_PIN=$(LC_ALL=C tr -dc '0-9' < /dev/urandom | fold -w6 | head -1)
+
+printf "\nAdmin PIN: %12s\nUser PIN: %13s\n\n" "$ADMIN_PIN" "$USER_PIN"
+```
+
+Change the Admin PIN:
+
+```bash
+gpg --command-fd=0 --pinentry-mode=loopback --change-pin <<EOF
+3
+12345678
+$ADMIN_PIN
+$ADMIN_PIN
+q
+EOF
+```
+
+Change the User PIN:
+
+```bash
+gpg --command-fd=0 --pinentry-mode=loopback --change-pin <<EOF
+1
+123456
+$USER_PIN
+$USER_PIN
+q
+EOF
+```
+
+Remove and re-insert YubiKey.
+
+Connect YubiKey and confirm its status:
+
+```bash
+gpg --card-status
+```
+
+You can modify the number of retry attempts:
+
+```bash
+ykman openpgp access set-retries 5 5 5 -f -a $ADMIN_PIN
+```
+
+Set the smart card attributes with admin mode:
+
+```bash
+gpg --command-fd=0 --pinentry-mode=loopback --edit-card <<EOF
+admin
+login
+$IDENTITY
+$ADMIN_PIN
+quit
+EOF
+```
+
+Run `gpg --card-status` to verify results.
+
+## Transfer Subkeys
+
+### Signature key
+
+```bash
+gpg --edit-key $KEYID
+```
+`key 1`
+
+`keytocard`
+
+select `1` for Signature key
+
+confirm with CERTIFY_PASS
+
+confirm with ADMIN_PIN
+
+`save`
+
+### Encryption key
+
+```bash
+gpg --edit-key $KEYID
+```
+`key 2`
+
+`keytocard`
+
+select `2` for Encryption key
+
+confirm with CERTIFY_PASS
+
+confirm with ADMIN_PIN
+
+`save`
+
+### Authentication key
+
+```bash
+gpg --edit-key $KEYID
+```
+`key 3`
+
+`keytocard`
+
+select `3` for Authentication key
+
+confirm with CERTIFY_PASS
+
+confirm with ADMIN_PIN
+
+`save`
+
+## Verify Subkeys
+
+Verify Subkeys have been moved to YubiKey with `gpg -K` and look for `ssb>`, for example:
+
+```bash
+sec   ed25519/0xF0F2CFEB04341FB5 2024-05-01 [C]
+      Key fingerprint = 4E2C 1FA3 372C BA96 A06A  C34A F0F2 CFEB 0434 1FB5
+uid                   [ultimate] YubiKey User <yubikey@example>
+ssb>  ed25519/0xB3CD10E502E19637 2024-05-01 [S] [expires: 2026-05-01]
+ssb>  cv25519/0x30CBE8C4B085B9F7 2024-05-01 [E] [expires: 2026-05-01]
+ssb>  ed25519/0xAD9E24E1B8CB9600 2024-05-01 [A] [expires: 2026-05-01]
+```
+
+If you have `>` after a tag indicates the key is on a smart card.
+
+### Using YubiKey
+
+```bash
+cd ~/.gnupg
+```
+```bash
+touch scdaemon.conf
+
+echo "disable-ccid" >>scdaemon.conf
+```
+
+```bash
+gpg --card-edit
+```
+
+```bash
+gpg/card> fetch
+
+gpg/card> quit
+```
+
+Remove and re-insert YubiKey.
+
+Verify the status with `gpg --card-status` which will list the available Subkeys:
+
+```bash
+Reader ...........: Yubico YubiKey OTP FIDO CCID 00 00
+Application ID ...: D2760001240102010006055532110000
+Application type .: OpenPGP
+Version ..........: 3.4
+Manufacturer .....: Yubico
+Serial number ....: 05553211
+Name of cardholder: YubiKey User
+Language prefs ...: en
+Salutation .......:
+URL of public key : [not set]
+Login data .......: yubikey@example
+Signature PIN ....: not forced
+Key attributes ...: ed25519 cv25519 ed25519
+Max. PIN lengths .: 127 127 127
+PIN retry counter : 3 3 3
+Signature counter : 0
+KDF setting ......: on
+Signature key ....: CF5A 305B 808B 7A0F 230D  A064 B3CD 10E5 02E1 9637
+      created ....: 2024-01-01 12:00:00
+Encryption key....: A5FA A005 5BED 4DC9 889D  38BC 30CB E8C4 B085 B9F7
+      created ....: 2024-01-01 12:00:00
+Authentication key: 570E 1355 6D01 4C04 8B6D  E2A3 AD9E 24E1 B8CB 9600
+      created ....: 2024-01-01 12:00:00
+General key info..: sub  ed25519/0xB3CD10E502E19637 2024-01-01 YubiKey User <yubikey@example>
+sec#  ed25519/0xF0F2CFEB04341FB5  created: 2024-01-01  expires: never
+ssb>  ed25519/0xB3CD10E502E19637  created: 2024-01-01  expires: 2026-05-01
+                                  card-no: 0006 05553211
+ssb>  cv25519/0x30CBE8C4B085B9F7  created: 2024-01-01  expires: 2026-05-01
+                                  card-no: 0006 05553211
+ssb>  ed25519/0xAD9E24E1B8CB9600  created: 2024-01-01  expires: 2026-05-01
+                                  card-no: 0006 05553211
+```
+
+
+### Configure touch
+
+Encryption:
+
+```bash
+ykman openpgp keys set-touch dec on
+```
+Versions of YubiKey Manager before 5.1.0 use `enc` instead of `dec` for encryption:
+
+```bash
+ykman openpgp keys set-touch enc on
+```
+
+Signature:
+
+```bash
+ykman openpgp keys set-touch sig on
+```
+
+Authentication:
+
+```bash
+ykman openpgp keys set-touch aut on
+```
+
+## SSH
+
