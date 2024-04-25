@@ -143,7 +143,7 @@ gpg -K
 
 The output will display [C]ertify, [S]ignature, [E]ncryption and [A]uthentication keys:
 
-```bash
+```
 sec   ed25519/0xF0F2CFEB04341FB5 2024-05-01 [C]
       Key fingerprint = 4E2C 1FA3 372C BA96 A06A  C34A F0F2 CFEB 0434 1FB5
 uid                   [ultimate] YubiKey User <yubikey@example>
@@ -294,7 +294,7 @@ confirm with ADMIN_PIN
 
 Verify Subkeys have been moved to YubiKey with `gpg -K` and look for `ssb>`, for example:
 
-```bash
+```
 sec   ed25519/0xF0F2CFEB04341FB5 2024-05-01 [C]
       Key fingerprint = 4E2C 1FA3 372C BA96 A06A  C34A F0F2 CFEB 0434 1FB5
 uid                   [ultimate] YubiKey User <yubikey@example>
